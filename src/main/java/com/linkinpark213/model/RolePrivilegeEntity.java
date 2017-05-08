@@ -6,11 +6,11 @@ import javax.persistence.*;
  * Created by ooo on 2017/5/8 0008.
  */
 @Entity
-@Table(name = "role_priviledge", schema = "rbac", catalog = "")
-public class RolePriviledgeEntity {
+@Table(name = "role_privilege", schema = "rbac", catalog = "")
+public class RolePrivilegeEntity {
     private int id;
     private RoleEntity roleByRoleid;
-    private PriviledgeEntity priviledgeByPriviledgeid;
+    private PrivilegeEntity privilegeByPriviledgeid;
 
     @Id
     @Column(name = "id")
@@ -27,7 +27,7 @@ public class RolePriviledgeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RolePriviledgeEntity that = (RolePriviledgeEntity) o;
+        RolePrivilegeEntity that = (RolePrivilegeEntity) o;
 
         if (id != that.id) return false;
 
@@ -50,12 +50,12 @@ public class RolePriviledgeEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "priviledgeid", referencedColumnName = "id", nullable = false)
-    public PriviledgeEntity getPriviledgeByPriviledgeid() {
-        return priviledgeByPriviledgeid;
+    @JoinColumn(name = "privilegeid", referencedColumnName = "id", nullable = false)
+    public PrivilegeEntity getPriviledgeByPriviledgeid() {
+        return privilegeByPriviledgeid;
     }
 
-    public void setPriviledgeByPriviledgeid(PriviledgeEntity priviledgeByPriviledgeid) {
-        this.priviledgeByPriviledgeid = priviledgeByPriviledgeid;
+    public void setPriviledgeByPriviledgeid(PrivilegeEntity privilegeByPriviledgeid) {
+        this.privilegeByPriviledgeid = privilegeByPriviledgeid;
     }
 }

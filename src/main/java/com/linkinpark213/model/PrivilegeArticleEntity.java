@@ -6,10 +6,10 @@ import javax.persistence.*;
  * Created by ooo on 2017/5/8 0008.
  */
 @Entity
-@Table(name = "priviledge_article", schema = "rbac", catalog = "")
-public class PriviledgeArticleEntity {
+@Table(name = "privilege_article", schema = "rbac", catalog = "")
+public class PrivilegeArticleEntity {
     private int id;
-    private PriviledgeEntity priviledgeByPriviledgeid;
+    private PrivilegeEntity priviledgeByPriviledgeid;
     private ArticleEntity articleByArticleid;
 
     @Id
@@ -27,7 +27,7 @@ public class PriviledgeArticleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PriviledgeArticleEntity that = (PriviledgeArticleEntity) o;
+        PrivilegeArticleEntity that = (PrivilegeArticleEntity) o;
 
         if (id != that.id) return false;
 
@@ -40,12 +40,12 @@ public class PriviledgeArticleEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "priviledgeid", referencedColumnName = "id", nullable = false)
-    public PriviledgeEntity getPriviledgeByPriviledgeid() {
+    @JoinColumn(name = "privilegeid", referencedColumnName = "id", nullable = false)
+    public PrivilegeEntity getPriviledgeByPriviledgeid() {
         return priviledgeByPriviledgeid;
     }
 
-    public void setPriviledgeByPriviledgeid(PriviledgeEntity priviledgeByPriviledgeid) {
+    public void setPriviledgeByPriviledgeid(PrivilegeEntity priviledgeByPriviledgeid) {
         this.priviledgeByPriviledgeid = priviledgeByPriviledgeid;
     }
 

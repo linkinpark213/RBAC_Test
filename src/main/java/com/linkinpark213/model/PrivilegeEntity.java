@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by ooo on 2017/5/8 0008.
  */
 @Entity
-@Table(name = "priviledge", schema = "rbac", catalog = "")
-public class PriviledgeEntity {
+@Table(name = "privilege", schema = "rbac", catalog = "")
+public class PrivilegeEntity {
     private int id;
     private int type;
 
@@ -36,7 +36,7 @@ public class PriviledgeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PriviledgeEntity that = (PriviledgeEntity) o;
+        PrivilegeEntity that = (PrivilegeEntity) o;
 
         if (id != that.id) return false;
         if (type != that.type) return false;
