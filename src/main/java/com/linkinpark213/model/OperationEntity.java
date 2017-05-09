@@ -7,11 +7,10 @@ import java.util.Collection;
  * Created by ooo on 2017/5/10 0010.
  */
 @Entity
-@Table(name = "article", schema = "rbac", catalog = "")
-public class ArticleEntity {
+@Table(name = "operation", schema = "rbac", catalog = "")
+public class OperationEntity {
     private int id;
-    private String title;
-    private String content;
+    private Integer type;
     private Collection<PermissionEntity> permissionsById;
 
     @Id
@@ -25,23 +24,13 @@ public class ArticleEntity {
     }
 
     @Basic
-    @Column(name = "title")
-    public String getTitle() {
-        return title;
+    @Column(name = "type")
+    public Integer getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Basic
-    @Column(name = "content")
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     @Override
@@ -49,11 +38,10 @@ public class ArticleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ArticleEntity that = (ArticleEntity) o;
+        OperationEntity that = (OperationEntity) o;
 
         if (id != that.id) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (content != null ? !content.equals(that.content) : that.content != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
     }
@@ -61,12 +49,11 @@ public class ArticleEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "articleByArticleId")
+    @OneToMany(mappedBy = "operationByOperationId")
     public Collection<PermissionEntity> getPermissionsById() {
         return permissionsById;
     }

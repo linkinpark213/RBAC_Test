@@ -2,11 +2,12 @@ package com.linkinpark213.repository;
 
 import com.linkinpark213.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
- * Created by ooo on 2017/5/8 0008.
+ * Created by ooo on 2017/5/10 0010.
  */
-@Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+    public List<UserEntity> findByName(String name);
 }

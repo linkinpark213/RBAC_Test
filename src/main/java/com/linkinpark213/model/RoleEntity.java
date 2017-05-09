@@ -1,15 +1,18 @@
 package com.linkinpark213.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Created by ooo on 2017/5/8 0008.
+ * Created by ooo on 2017/5/10 0010.
  */
 @Entity
 @Table(name = "role", schema = "rbac", catalog = "")
 public class RoleEntity {
     private int id;
-    private int type;
+    private String name;
+    private Collection<AuthorizationEntity> authorizationsById;
+    private Collection<UserEntity> usersById;
 
     @Id
     @Column(name = "id")
@@ -22,13 +25,13 @@ public class RoleEntity {
     }
 
     @Basic
-    @Column(name = "type")
-    public int getType() {
-        return type;
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class RoleEntity {
         RoleEntity that = (RoleEntity) o;
 
         if (id != that.id) return false;
-        if (type != that.type) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
     }
@@ -47,7 +50,25 @@ public class RoleEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + type;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "roleByRoleId")
+    public Collection<AuthorizationEntity> getAuthorizationsById() {
+        return authorizationsById;
+    }
+
+    public void setAuthorizationsById(Collection<AuthorizationEntity> authorizationsById) {
+        this.authorizationsById = authorizationsById;
+    }
+
+    @OneToMany(mappedBy = "roleByRoleId")
+    public Collection<UserEntity> getUsersById() {
+        return usersById;
+    }
+
+    public void setUsersById(Collection<UserEntity> usersById) {
+        this.usersById = usersById;
     }
 }

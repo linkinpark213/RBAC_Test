@@ -6,11 +6,11 @@ import javax.persistence.*;
  * Created by ooo on 2017/5/10 0010.
  */
 @Entity
-@Table(name = "user", schema = "rbac", catalog = "")
-public class UserEntity {
+@Table(name = "authorization", schema = "rbac", catalog = "")
+public class AuthorizationEntity {
     private int id;
-    private String name;
     private RoleEntity roleByRoleId;
+    private PermissionEntity permissionByPermissionId;
 
     @Id
     @Column(name = "id")
@@ -22,43 +22,40 @@ public class UserEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserEntity that = (UserEntity) o;
+        AuthorizationEntity that = (AuthorizationEntity) o;
 
         if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return id;
     }
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     public RoleEntity getRoleByRoleId() {
         return roleByRoleId;
     }
 
     public void setRoleByRoleId(RoleEntity roleByRoleId) {
         this.roleByRoleId = roleByRoleId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "permission_id", referencedColumnName = "id", nullable = false)
+    public PermissionEntity getPermissionByPermissionId() {
+        return permissionByPermissionId;
+    }
+
+    public void setPermissionByPermissionId(PermissionEntity permissionByPermissionId) {
+        this.permissionByPermissionId = permissionByPermissionId;
     }
 }
