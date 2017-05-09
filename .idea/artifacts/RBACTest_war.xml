@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="RBACTest:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="RBACTest.war">
-      <element id="artifact" artifact-name="RBACTest:war exploded" />
-    </root>
-  </artifact>
-</component>
