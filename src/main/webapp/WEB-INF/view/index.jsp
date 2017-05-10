@@ -12,17 +12,15 @@
 <head>
     <title>Blog Index</title>
     <script src="/public/js/jquery.js"></script>
-
 </head>
 <body>
-<div id="main-container">
-    <div id="login-frame">
-        <input type="number" value="1" name="id" id="user-id"/>
-        <input type="button" id="login-btn" value="Login" onclick="login()"/>
-    </div>
-    <div id="articles">
+<div id="login-frame">
+    User ID:
+    <input type="number" value="1" name="id" id="user-id"/>
+    <input type="button" id="login-btn" value="Login" onclick="login()"/>
+</div>
+<div id="articles">
 
-    </div>
 </div>
 <script>
     function login() {
@@ -35,11 +33,14 @@
             },
             success: function (data) {
                 console.log(data.length);
+                var userId = $('#user-id').val();
                 var articles = $('#articles');
                 articles.html('');
                 for (var i = 0; i < data.length; i++) {
                     articles.append("<div>" +
-                        "<a><h2>" +
+                        "<a href=\"/article/" +
+                        data[i].id +
+                        "\"><h2>" +
                         data[i].title +
                         "</h2></a>" +
                         "<p>" +
@@ -48,6 +49,7 @@
                         "</div>"
                     );
                 }
+                $('#login-frame').html("Logged in as user #" + userId + "<br><a href='/'>Log Out</a>");
             },
             error: function () {
                 alert("Login Failed.");

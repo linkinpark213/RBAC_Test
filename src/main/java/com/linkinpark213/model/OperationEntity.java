@@ -56,7 +56,7 @@ public class OperationEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "operationByOperationId")
+    @OneToMany(mappedBy = "operationByOperationId", fetch = FetchType.EAGER)
     public Collection<PermissionEntity> getPermissionsById() {
         return permissionsById;
     }

@@ -54,11 +54,16 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
-    public void req(ModelMap modelMap, PrintWriter printWriter, @PathVariable("id") int articleId) {
-
+    public String article(ModelMap modelMap, @PathVariable("id") int articleId) {
+        ArticleEntity article = articleRepository.findOne(articleId);
+        if(article != null) {
+            modelMap.addAttribute("article", article);
+            return "article";
+        } else
+            return "index";
     }
 
-    public int[] articlePermissions(int userId, int articleId) {
+    public int[] permittedOperations(int userId, int articleId) {
         UserEntity user = userRepository.findOne(userId);
         RoleEntity role = user.getRoleByRoleId();
         Collection<AuthorizationEntity> authorizationCollection = role.getAuthorizationsById();

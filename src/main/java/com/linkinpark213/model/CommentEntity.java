@@ -1,18 +1,17 @@
 package com.linkinpark213.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 /**
  * Created by ooo on 2017/5/10 0010.
  */
 @Entity
-@Table(name = "article", schema = "rbac")
-public class ArticleEntity {
+@Table(name = "comment", schema = "rbac", catalog = "")
+public class CommentEntity {
     private int id;
-    private String title;
+    private int articleId;
+    private int userId;
     private String content;
-    private Collection<PermissionEntity> permissionsById;
 
     @Id
     @Column(name = "id")
@@ -25,13 +24,23 @@ public class ArticleEntity {
     }
 
     @Basic
-    @Column(name = "title")
-    public String getTitle() {
-        return title;
+    @Column(name = "article_id")
+    public int getArticleId() {
+        return articleId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
+    }
+
+    @Basic
+    @Column(name = "user_id")
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Basic
@@ -49,10 +58,11 @@ public class ArticleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ArticleEntity that = (ArticleEntity) o;
+        CommentEntity that = (CommentEntity) o;
 
         if (id != that.id) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (articleId != that.articleId) return false;
+        if (userId != that.userId) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
 
         return true;
@@ -61,17 +71,9 @@ public class ArticleEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + articleId;
+        result = 31 * result + userId;
         result = 31 * result + (content != null ? content.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "articleByArticleId", fetch = FetchType.EAGER)
-    public Collection<PermissionEntity> getPermissionsById() {
-        return permissionsById;
-    }
-
-    public void setPermissionsById(Collection<PermissionEntity> permissionsById) {
-        this.permissionsById = permissionsById;
     }
 }

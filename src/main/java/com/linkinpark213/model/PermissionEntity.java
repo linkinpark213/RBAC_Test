@@ -67,7 +67,7 @@ public class PermissionEntity {
         return id;
     }
 
-    @OneToMany(mappedBy = "permissionByPermissionId")
+    @OneToMany(mappedBy = "permissionByPermissionId", fetch = FetchType.EAGER)
     public Collection<AuthorizationEntity> getAuthorizationsById() {
         return authorizationsById;
     }
