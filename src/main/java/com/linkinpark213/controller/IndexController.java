@@ -26,8 +26,6 @@ public class IndexController {
     @Autowired
     ArticleRepository articleRepository;
     @Autowired
-    AuthorizationRepository authorizationRepository;
-    @Autowired
     PermissionRepository permissionRepository;
     @Autowired
     CommentRepository commentRepository;
@@ -40,7 +38,6 @@ public class IndexController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public void login(HttpSession session, PrintWriter printWriter, @RequestParam("user-id") int userId) {
         UserEntity user = userRepository.findOne(userId);
-        System.out.println("User Logging in: " + userId);
         if (user != null) {
             session.setAttribute("user", user);
             printWriter.write(JSON.toJSONString(articleRepository.findAll()));

@@ -9,5 +9,4 @@ import java.util.List;
  * Created by ooo on 2017/5/10 0010.
  */
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-    public List<UserEntity> findByName(String name);
 }
