@@ -69,7 +69,7 @@ public class IndexController {
                           @RequestParam("comment") String content) {
         CommentEntity comment = new CommentEntity();
         UserEntity user = (UserEntity) session.getAttribute("user");
-        if(user != null) {
+        if(user != null && permissionCheck(user.getId(), articleId, OperationEntity.COMMENT)) {
             comment.setArticleId(articleId);
             comment.setContent(content);
             comment.setUserId(user.getId());
@@ -86,7 +86,7 @@ public class IndexController {
                            @RequestParam("resubmit-content") String content) {
         ArticleEntity article = articleRepository.findOne(articleId);
         UserEntity user = (UserEntity) session.getAttribute("user");
-        if(article != null && user != null) {
+        if(article != null && user != null && permissionCheck(user.getId(), articleId, OperationEntity.EDIT)) {
             article.setTitle(title);
             article.setContent(content);
             articleRepository.saveAndFlush(article);
