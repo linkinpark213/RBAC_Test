@@ -10,11 +10,51 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>This is the alternative JSP page</title>
+    <title>Blog Index</title>
+    <script src="/public/js/jquery.js"></script>
+
 </head>
 <body>
-This is the alternative JSP page.
-<br>
-${role.type}
+<div id="main-container">
+    <div id="login-frame">
+        <input type="number" value="1" name="id" id="user-id"/>
+        <input type="button" id="login-btn" value="Login" onclick="login()"/>
+    </div>
+    <div id="articles">
+
+    </div>
+</div>
+<script>
+    function login() {
+        $.ajax({
+            url: "/login",
+            type: "get",
+            dataType: "json",
+            data: {
+                "user-id": $('#user-id').val()
+            },
+            success: function (data) {
+                console.log(data.length);
+                var articles = $('#articles');
+                articles.html('');
+                for (var i = 0; i < data.length; i++) {
+                    articles.append("<div>" +
+                        "<a><h2>" +
+                        data[i].title +
+                        "</h2></a>" +
+                        "<p>" +
+                        data[i].content +
+                        "</p>" +
+                        "</div>"
+                    );
+                }
+            },
+            error: function () {
+                alert("Login Failed.");
+            }
+        })
+    }
+
+</script>
 </body>
 </html>

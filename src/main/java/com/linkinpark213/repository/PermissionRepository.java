@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Created by ooo on 2017/5/10 0010.
  */
 public interface PermissionRepository extends JpaRepository<PermissionEntity, Integer> {
-    public PermissionEntity findByArticleByArticleIdAndOperationByOperationId(ArticleEntity articleEntity, OperationEntity operationEntity);
+    public PermissionEntity findByArticleIdAndOperationId(int articleId, int operationId);
 }

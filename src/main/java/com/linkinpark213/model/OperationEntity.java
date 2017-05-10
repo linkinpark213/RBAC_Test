@@ -12,6 +12,9 @@ public class OperationEntity {
     private int id;
     private Integer type;
     private Collection<PermissionEntity> permissionsById;
+    public static final int EDIT = 1;
+    public static final int READ = 2;
+    public static final int COMMENT = 3;
 
     @Id
     @Column(name = "id")

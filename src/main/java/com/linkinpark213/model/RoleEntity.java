@@ -54,7 +54,7 @@ public class RoleEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "roleByRoleId")
+    @OneToMany(mappedBy = "roleByRoleId", fetch = FetchType.EAGER)
     public Collection<AuthorizationEntity> getAuthorizationsById() {
         return authorizationsById;
     }
